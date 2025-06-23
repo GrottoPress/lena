@@ -1,0 +1,10 @@
+/.shards/
+/.vscode/
+/bin/
+/lib/
+/tmp/
+*.dwarf
+.env*
+/.*-version*
+/forge.yaml
+/shard.lock
