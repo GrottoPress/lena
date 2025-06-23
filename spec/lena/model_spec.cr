@@ -65,7 +65,7 @@ describe Lena::Model::Endpoint do
       response = client.models.list(after_id: after_id)
 
       response.request_id.should eq(request_id)
-      response.has_more.should be_true
+      response.has_more?.should be_true
       response.should be_a(Lena::Model::List)
     end
   end
