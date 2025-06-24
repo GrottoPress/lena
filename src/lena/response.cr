@@ -2,6 +2,7 @@ module Lena::Response
   enum Type
     Error
     Message
+    MessageBatch
     Model
   end
 

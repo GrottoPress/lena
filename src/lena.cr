@@ -23,6 +23,10 @@ struct Lena
     Model::Endpoint.new(self)
   end
 
+  def message_batches : MessageBatch::Endpoint
+    MessageBatch::Endpoint.new(self)
+  end
+
   def self.uri : URI
     URI.parse("https://api.anthropic.com/v1")
   end
