@@ -19,7 +19,7 @@ struct Lena::Message::Content
   getter file_id : String?
   getter id : String?
   getter input : JSON::Any?
-  getter is_error : Bool?
+  getter? is_error : Bool?
   getter name : String?
   getter server_name : String?
   getter signature : String?
