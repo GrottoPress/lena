@@ -1,4 +1,4 @@
-struct Lena::CacheCreation
+struct Lena::Usage::CacheCreation
   include Resource
 
   getter ephemeral_1h_input_tokens : Int32
