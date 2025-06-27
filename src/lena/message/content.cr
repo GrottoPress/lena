@@ -10,6 +10,7 @@ struct Lena::Message::Content
     McpToolUse
     McpToolResult
     ContainerUpload
+    Image
   end
 
   include Resource
