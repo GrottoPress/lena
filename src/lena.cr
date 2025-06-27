@@ -7,13 +7,12 @@ require "./lena/resource"
 require "./lena/**"
 
 struct Lena
-  @@http_client = HTTP::Client.new(uri)
-
   def initialize(api_key : String)
+    @http_client = HTTP::Client.new(self.class.uri)
     set_headers(api_key)
   end
 
-  forward_missing_to @@http_client
+  forward_missing_to @http_client
 
   def messages : Message::Endpoint
     Message::Endpoint.new(self)
@@ -32,7 +31,7 @@ struct Lena
   end
 
   private def set_headers(api_key)
-    @@http_client.before_request do |request|
+    @http_client.before_request do |request|
       set_content_type(request.headers)
       set_user_agent(request.headers)
       set_anthropic_version(request.headers)

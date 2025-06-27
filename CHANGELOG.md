@@ -10,6 +10,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 - Add `Lena::Message::Content::Image` enum member
 
+### Fixed
+- Give each `Lena` instance its own `HTTP::Client` instance
+
 ## [0.1.0] - 2025-06-24
 
 ### Added
