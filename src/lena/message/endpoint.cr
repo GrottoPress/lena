@@ -5,18 +5,18 @@ struct Lena::Message::Endpoint
   end
 
   def create(headers = nil, **params) : Item
-    response = @client.post(self.class.uri.path, headers, params.to_json)
+    response = @client.post(uri.path, headers, params.to_json)
     Item.from_json(response.body).set_additional_properties(response)
   end
 
   def count_tokens(headers = nil, **params) : Usage::Item
-    path = "#{self.class.uri.path}/count_tokens"
+    path = "#{uri.path}/count_tokens"
     response = @client.post(path, headers, params.to_json)
 
     Usage::Item.from_json(response.body).set_additional_properties(response)
   end
 
-  def self.uri : URI
-    Lena.uri.tap { |uri| uri.path += "/messages" }
+  getter uri : URI do
+    URI.parse(@client.uri.to_s).tap { |uri| uri.path += "/messages" }
   end
 end

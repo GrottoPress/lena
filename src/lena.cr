@@ -7,9 +7,15 @@ require "./lena/resource"
 require "./lena/**"
 
 struct Lena
-  def initialize(api_key : String)
-    @http_client = HTTP::Client.new(self.class.uri)
+  getter :uri
+
+  def initialize(api_key : String, @uri : URI)
+    @http_client = HTTP::Client.new(uri)
     set_headers(api_key)
+  end
+
+  def self.new(api_key : String, uri = "https://api.anthropic.com/v1") : self
+    new api_key, URI.parse(uri)
   end
 
   forward_missing_to @http_client
@@ -24,10 +30,6 @@ struct Lena
 
   def message_batches : MessageBatch::Endpoint
     MessageBatch::Endpoint.new(self)
-  end
-
-  def self.uri : URI
-    URI.parse("https://api.anthropic.com/v1")
   end
 
   private def set_headers(api_key)
