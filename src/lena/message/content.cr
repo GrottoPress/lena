@@ -4,6 +4,7 @@ struct Lena::Message::Content
     Thinking
     RedactedThinking
     ToolUse
+    ToolResult
     ServerToolUse
     WebSearchToolResult
     CodeExecutionToolResult
