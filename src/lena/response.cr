@@ -3,6 +3,7 @@ module Lena::Response
     Error
     Message
     MessageBatch
+    MessageBatchDeleted
     Model
   end
 

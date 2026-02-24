@@ -3,7 +3,7 @@ class Lena::MessageBatch::Result::Item
 
   getter results : Array(Lena::MessageBatch::Result)?
 
-  def initialize(jsonl : String)
+  private def initialize(jsonl : String)
     @results = jsonl.lines.map do |line|
       Lena::MessageBatch::Result.from_json(line.strip)
     end

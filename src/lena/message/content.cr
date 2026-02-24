@@ -4,18 +4,19 @@ struct Lena::Message::Content
     Thinking
     RedactedThinking
     ToolUse
-    ToolResult
     ServerToolUse
     WebSearchToolResult
+    WebFetchToolResult
     CodeExecutionToolResult
-    McpToolUse
-    McpToolResult
+    BashCodeExecutionToolResult
+    TextEditorCodeExecutionToolResult
+    ToolSearchToolResult
     ContainerUpload
-    Image
   end
 
   include Resource
 
+  getter caller : JSON::Any?
   getter content : JSON::Any?
   getter data : String?
   getter file_id : String?
