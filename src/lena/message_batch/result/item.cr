@@ -9,6 +9,10 @@ class Lena::MessageBatch::Result::Item
     end
   end
 
+  def self.from_jsonl(response : HTTP::Client::Response) : self
+    from_jsonl(response.body).set_additional_properties(response)
+  end
+
   def self.from_jsonl(jsonl : String) : self
     new(jsonl)
   rescue JSON::ParseException

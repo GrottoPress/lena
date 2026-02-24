@@ -8,14 +8,14 @@ struct Lena::Model::Endpoint
     path = "#{uri.path}/#{id}"
     response = @client.get(path, headers)
 
-    Item.from_json(response.body).set_additional_properties(response)
+    Item.from_json(response)
   end
 
   def list(headers = nil, **params) : List
     resource = "#{uri.path}?#{URI::Params.encode(params)}"
     response = @client.get(resource, headers)
 
-    List.from_json(response.body).set_additional_properties(response)
+    List.from_json(response)
   end
 
   getter uri : URI do

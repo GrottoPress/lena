@@ -6,40 +6,40 @@ struct Lena::MessageBatch::Endpoint
 
   def create(headers = nil, **params) : Item
     response = @client.post(uri.path, headers, params.to_json)
-    Item.from_json(response.body).set_additional_properties(response)
+    Item.from_json(response)
   end
 
   def fetch(id : String, headers = nil) : Item
     path = "#{uri.path}/#{id}"
     response = @client.get(path, headers)
 
-    Item.from_json(response.body).set_additional_properties(response)
+    Item.from_json(response)
   end
 
   def list(headers = nil, **params) : List
     response = @client.get(uri.path, headers)
-    List.from_json(response.body).set_additional_properties(response)
+    List.from_json(response)
   end
 
   def cancel(id : String, headers = nil) : Item
     path = "#{uri.path}/#{id}/cancel"
     response = @client.post(path, headers)
 
-    Item.from_json(response.body).set_additional_properties(response)
+    Item.from_json(response)
   end
 
   def delete(id : String, headers = nil) : Item
     path = "#{uri.path}/#{id}"
     response = @client.delete(path, headers)
 
-    Item.from_json(response.body).set_additional_properties(response)
+    Item.from_json(response)
   end
 
   def results(id : String, headers = nil) : Result::Item
     path = "#{uri.path}/#{id}/results"
     response = @client.get(path, headers)
 
-    Result::Item.from_jsonl(response.body).set_additional_properties(response)
+    Result::Item.from_jsonl(response)
   end
 
   getter uri : URI do

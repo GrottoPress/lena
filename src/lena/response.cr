@@ -14,6 +14,10 @@ module Lena::Response
     getter request_id : String?
     getter type : Lena::Response::Type?
 
+    def self.from_json(response : HTTP::Client::Response) : self
+      from_json(response.body).set_additional_properties(response)
+    end
+
     protected def set_additional_properties(response : HTTP::Client::Response)
       @organization_id = response.headers["Anthropic-Organization-ID"]?
       @request_id = response.headers["Request-ID"]?
