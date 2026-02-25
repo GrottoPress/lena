@@ -1,4 +1,4 @@
-class Lena::Message
+struct Lena::Message
   include Resource
 
   getter container : Container?

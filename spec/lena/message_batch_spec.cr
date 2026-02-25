@@ -7,7 +7,7 @@ describe Lena::MessageBatch::Endpoint do
       organization_id = "a1b2c3"
       request_id = "req_123"
 
-      body = <<-JSON
+      body = <<-'JSON'
         {
           "id": "msgbatch_013Zva2CMHLNnXvNJPErV5x8",
           "type": "message_batch",
@@ -54,9 +54,16 @@ describe Lena::MessageBatch::Endpoint do
 
       response.organization_id.should eq(organization_id)
       response.request_id.should eq(request_id)
+
       response.should be_a(Lena::MessageBatch::Item)
-      response.id.should eq("msgbatch_013Zva2CMHLNnXvNJPErV5x8")
-      response.processing_status.should eq(Lena::MessageBatch::ProcessingStatus::InProgress)
+      response.data.should be_a(Lena::MessageBatch)
+
+      response.data.try do |data|
+        data.id.should eq("msgbatch_013Zva2CMHLNnXvNJPErV5x8")
+
+        data.processing_status
+          .should(eq Lena::MessageBatch::ProcessingStatus::InProgress)
+      end
     end
   end
 
@@ -101,10 +108,15 @@ describe Lena::MessageBatch::Endpoint do
       response = client.message_batches.fetch(batch_id)
 
       response.organization_id.should eq(organization_id)
+
       response.should be_a(Lena::MessageBatch::Item)
-      response.id.should eq(batch_id)
-      response.processing_status.try(&.ended?).should be_true
-      response.results_url.should eq(results_url)
+      response.data.should be_a(Lena::MessageBatch)
+
+      response.data.try do |data|
+        data.id.should eq(batch_id)
+        data.processing_status.try(&.ended?).should be_true
+        data.results_url.should eq(results_url)
+      end
     end
   end
 
@@ -150,8 +162,10 @@ describe Lena::MessageBatch::Endpoint do
       response = client.message_batches.list
 
       response.organization_id.should eq(organization_id)
+
       response.should be_a(Lena::MessageBatch::List)
       response.data.should be_a(Array(Lena::MessageBatch))
+
       response.data.try(&.size).should eq(1)
       response.has_more?.should be_false
     end
@@ -197,9 +211,14 @@ describe Lena::MessageBatch::Endpoint do
       response = client.message_batches.cancel(batch_id)
 
       response.organization_id.should eq(organization_id)
+
       response.should be_a(Lena::MessageBatch::Item)
-      response.id.should eq(batch_id)
-      response.processing_status.try(&.canceling?).should be_true
+      response.data.should be_a(Lena::MessageBatch)
+
+      response.data.try do |data|
+        data.id.should eq(batch_id)
+        data.processing_status.try(&.canceling?).should be_true
+      end
     end
   end
 
@@ -243,9 +262,14 @@ describe Lena::MessageBatch::Endpoint do
       response = client.message_batches.delete(batch_id)
 
       response.organization_id.should eq(organization_id)
+
       response.should be_a(Lena::MessageBatch::Item)
-      response.id.should eq(batch_id)
-      response.archived_at.should_not be_nil
+      response.data.should be_a(Lena::MessageBatch)
+
+      response.data.try do |data|
+        data.id.should eq(batch_id)
+        data.archived_at.should_not be_nil
+      end
     end
   end
 
@@ -260,7 +284,10 @@ describe Lena::MessageBatch::Endpoint do
 {"custom_id": "request-2", "result": {"type": "succeeded", "message": {"id": "msg_013Zva2CMHLNnXjNJJKqJ2EG", "content": [{"type": "text", "text": "I'm doing well, thank you!"}], "model": "claude-3-haiku-20240307", "role": "assistant", "stop_reason": "end_turn", "stop_sequence": null, "usage": {"input_tokens": 12, "output_tokens": 20}}}}
 JSONL
 
-      WebMock.stub(:GET, "https://api.anthropic.com/v1/messages/batches/#{batch_id}/results")
+      WebMock.stub(
+        :GET,
+        "https://api.anthropic.com/v1/messages/batches/#{batch_id}/results"
+      )
         .with(headers: {"X-API-Key" => api_key})
         .to_return(
           body: results_body,
@@ -270,25 +297,25 @@ JSONL
       client = Lena.new(api_key)
       response = client.message_batches.results(batch_id)
 
-      response.should be_a(Lena::MessageBatch::Result::Item)
       response.organization_id.should eq(organization_id)
-      response.results.should_not be_nil
-      results_array = response.results.not_nil!
+
+      response.should be_a(Lena::MessageBatch::Result::List)
+      response.data.should be_a(Array(Lena::MessageBatch::Result))
+
+      results_array = response.data.not_nil!
       results_array.size.should eq(2)
 
       # Test first result
       first_result = results_array[0]
       first_result.custom_id.should eq("request-1")
-      first_result.result.should_not be_nil
-      first_result.result.not_nil!.type.should eq(Lena::MessageBatch::Result::Type::Succeeded)
-      first_result.result.not_nil!.message.should_not be_nil
-      first_result.result.not_nil!.message.not_nil!.id.should eq("msg_013Zva2CMHLNnXjNJJKqJ2EF")
+      first_result.type.should(eq Lena::MessageBatch::Result::Type::Succeeded)
+      first_result.message.try(&.id).should(eq "msg_013Zva2CMHLNnXjNJJKqJ2EF")
 
       # Test second result
       second_result = results_array[1]
       second_result.custom_id.should eq("request-2")
-      second_result.result.not_nil!.type.should eq(Lena::MessageBatch::Result::Type::Succeeded)
-      second_result.result.not_nil!.message.not_nil!.id.should eq("msg_013Zva2CMHLNnXjNJJKqJ2EG")
+      second_result.type.should(eq Lena::MessageBatch::Result::Type::Succeeded)
+      second_result.message.try(&.id).should(eq "msg_013Zva2CMHLNnXjNJJKqJ2EG")
     end
   end
 
@@ -321,12 +348,12 @@ JSONL
     client = Lena.new(api_key)
     response = client.message_batches.results(batch_id)
 
-    response.should be_a(Lena::MessageBatch::Result::Item)
+    response.should be_a(Lena::MessageBatch::Result::List)
     response.type.try(&.error?).should be_true
     response.error.should be_a(Lena::Error)
     response.error.try(&.type.not_found_error?).should be_true
     response.error.try(&.message).should eq("Batch not found")
-    response.results.should be_nil
+    response.data.should be_nil
     response.organization_id.should eq(organization_id)
     response.request_id.should eq(request_id)
   end

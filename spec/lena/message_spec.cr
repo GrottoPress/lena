@@ -73,11 +73,13 @@ describe Lena::Message::Endpoint do
 
       response.type.try(&.message?).should be_true
       response.request_id.should eq(request_id)
-      response.model.should eq(model)
+      response.data.should be_a(Lena::Message)
 
-      response.should be_a(Lena::Message::Item)
-      response.usage.should be_a(Lena::Usage)
-      response.content.should be_a(Array(Lena::Message::Content))
+      response.data.try do |data|
+        data.content.should be_a(Array(Lena::Message::Content))
+        data.model.should eq(model)
+        data.usage.should be_a(Lena::Usage)
+      end
     end
   end
 end

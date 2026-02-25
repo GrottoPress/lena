@@ -35,11 +35,11 @@ struct Lena::MessageBatch::Endpoint
     Item.from_json(response)
   end
 
-  def results(id : String, headers = nil) : Result::Item
+  def results(id : String, headers = nil) : Result::List
     path = "#{uri.path}/#{id}/results"
     response = @client.get(path, headers)
 
-    Result::Item.from_jsonl(response)
+    Result::List.from_jsonl(response)
   end
 
   getter uri : URI do

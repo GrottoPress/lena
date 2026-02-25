@@ -1,4 +1,4 @@
-class Lena::Model
+struct Lena::Model
   include Resource
 
   getter created_at : Time?

@@ -18,10 +18,12 @@ See <https://docs.anthropic.com/en/api/models> for the raw JSON schema.
        # ...
      end
    else
-     puts response.created_at.try(&.day_of_week)
-     puts response.display_name
-     puts response.id
-     # ...
+     response.data.try do |model|
+       puts model.created_at.try(&.day_of_week)
+       puts model.display_name
+       puts model.id
+       # ...
+     end
    end
    ```
 

@@ -35,6 +35,8 @@ describe Lena do
     response.request_id.should eq(request_id)
     response.organization_id.should eq(organization_id)
 
+    response.data.should be_nil
+
     response.error.should be_a(Lena::Error)
     response.error.try(&.type.invalid_request_error?).should be_true
   end

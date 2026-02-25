@@ -1,4 +1,4 @@
-class Lena::Usage
+struct Lena::Usage
   include Resource
 
   getter cache_creation : CacheCreation?

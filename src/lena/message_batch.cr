@@ -1,4 +1,4 @@
-class Lena::MessageBatch
+struct Lena::MessageBatch
   include Resource
 
   getter archived_at : Time?

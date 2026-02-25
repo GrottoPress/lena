@@ -37,10 +37,12 @@ See <https://docs.anthropic.com/en/api/message-batches> for the raw JSON schema.
        # ...
      end
    else
-     puts response.id
-     puts response.processing_status
-     puts response.created_at
-     # ...
+     response.data.try do |batch|
+       puts batch.id
+       puts batch.processing_status
+       puts batch.created_at
+       # ...
+     end
    end
    ```
 
@@ -56,14 +58,16 @@ See <https://docs.anthropic.com/en/api/message-batches> for the raw JSON schema.
        # ...
      end
    else
-     puts response.id
-     puts response.processing_status
-     puts response.request_counts.try(&.processing)
-     puts response.request_counts.try(&.succeeded)
-     puts response.request_counts.try(&.errored)
-     puts response.request_counts.try(&.canceled)
-     puts response.request_counts.try(&.expired)
-     # ...
+     response.data.try do |batch|
+       puts batch.id
+       puts batch.processing_status
+       puts batch.request_counts.try(&.processing)
+       puts batch.request_counts.try(&.succeeded)
+       puts batch.request_counts.try(&.errored)
+       puts batch.request_counts.try(&.canceled)
+       puts batch.request_counts.try(&.expired)
+       # ...
+     end
    end
    ```
 
@@ -100,10 +104,12 @@ See <https://docs.anthropic.com/en/api/message-batches> for the raw JSON schema.
        # ...
      end
    else
-     puts response.id
-     puts response.processing_status
-     puts response.cancel_initiated_at
-     # ...
+     response.data.try do |batch|
+       puts batch.id
+       puts batch.processing_status
+       puts batch.cancel_initiated_at
+       # ...
+     end
    end
    ```
 
@@ -119,9 +125,11 @@ See <https://docs.anthropic.com/en/api/message-batches> for the raw JSON schema.
        # ...
      end
    else
-     puts response.id
-     puts response.archived_at
-     # ...
+     response.data.try do |batch|
+       puts batch.id
+       puts batch.archived_at
+       # ...
+     end
    end
    ```
 
@@ -137,16 +145,16 @@ See <https://docs.anthropic.com/en/api/message-batches> for the raw JSON schema.
        # ...
      end
    else
-     response.results.try &.each do |result|
+     response.data.try &.each do |result|
        puts result.custom_id
-       puts result.result.try(&.type)
+       puts result.type
 
-       if result.result.try(&.type.succeeded?)
-         puts result.result.try(&.message).try(&.id)
-         puts result.result.try(&.message).try(&.content)
-       elsif result.result.try(&.type.errored?)
-         puts result.result.try(&.error).try(&.type)
-         puts result.result.try(&.error).try(&.message)
+       if result.type.try(&.succeeded?)
+         puts result.message.try(&.id)
+         puts result.message.try(&.content)
+       elsif result.type.try(&.errored?)
+         puts result.error.try(&.type)
+         puts result.error.try(&.message)
        end
        # ...
      end

@@ -1,4 +1,4 @@
-class Lena::MessageBatch::List
+struct Lena::MessageBatch::List
   include Response
   include Pagination
 

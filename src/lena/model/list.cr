@@ -1,4 +1,4 @@
-class Lena::Model::List
+struct Lena::Model::List
   include Response
   include Pagination
 

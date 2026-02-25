@@ -1,14 +1,19 @@
-class Lena::MessageBatch::Result
+struct Lena::MessageBatch::Result
   include Resource
 
-  struct Result
-    include Resource
-
-    getter error : Error?
-    getter message : Message?
-    getter type : Type
-  end
+  @result : {error: Error?, message: Message?, type: Type}?
 
   getter custom_id : String?
-  getter result : Result?
+
+  def error : Error?
+    @result.try(&.[:error])
+  end
+
+  def message : Message?
+    @result.try(&.[:message])
+  end
+
+  def type : Type?
+    @result.try(&.[:type])
+  end
 end

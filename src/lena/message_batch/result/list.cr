@@ -1,11 +1,11 @@
-class Lena::MessageBatch::Result::Item
+struct Lena::MessageBatch::Result::List
   include Response
 
-  getter results : Array(Lena::MessageBatch::Result)?
+  getter data : Array(Result)?
 
   private def initialize(jsonl : String)
-    @results = jsonl.lines.map do |line|
-      Lena::MessageBatch::Result.from_json(line.strip)
+    @data = jsonl.lines.map do |line|
+      Result.from_json(line.strip)
     end
   end
 
