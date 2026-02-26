@@ -10,6 +10,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Changed
 - Normalize response outputs
 
+### Fixed
+- Add query parameters to URL in `Lena::MessageBatch::Endpoint#list`
+
 ## [0.2.3] - 2026-02-24
 
 ### Fixed

@@ -17,7 +17,8 @@ struct Lena::MessageBatch::Endpoint
   end
 
   def list(headers = nil, **params) : List
-    response = @client.get(uri.path, headers)
+    resource = "#{uri.path}?#{URI::Params.encode(params)}"
+    response = @client.get(resource, headers)
     List.from_json(response)
   end
 
