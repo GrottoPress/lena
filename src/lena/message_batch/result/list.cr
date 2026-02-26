@@ -7,7 +7,7 @@ struct Lena::MessageBatch::Result::List
     @data = jsonl.lines.compact_map do |line|
       stripped_line = line.strip
       next if stripped_line.empty?
-      Result.from_json(line.strip)
+      Result.from_json(stripped_line)
     end
   end
 
