@@ -4,7 +4,9 @@ struct Lena::MessageBatch::Result::List
   getter data : Array(Result)?
 
   private def initialize(jsonl : String)
-    @data = jsonl.lines.map do |line|
+    @data = jsonl.lines.compact_map do |line|
+      stripped_line = line.strip
+      next if stripped_line.empty?
       Result.from_json(line.strip)
     end
   end
