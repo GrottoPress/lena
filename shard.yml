@@ -1,5 +1,5 @@
 name: lena
-version: 0.2.3
+version: 0.3.0
 description: A low-level API client for Anthropic (Claude AI)
 
 authors:
