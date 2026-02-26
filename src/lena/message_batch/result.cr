@@ -5,15 +5,7 @@ struct Lena::MessageBatch::Result
 
   getter custom_id : String?
 
-  def error : Error?
-    @result.try(&.[:error])
-  end
-
-  def message : Message?
-    @result.try(&.[:message])
-  end
-
-  def type : Type?
-    @result.try(&.[:type])
+  macro method_missing(method)
+    @result.try(&.[:{{ method.name }}])
   end
 end
