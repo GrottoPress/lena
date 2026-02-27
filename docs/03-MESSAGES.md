@@ -22,7 +22,7 @@ See <https://docs.anthropic.com/en/api/messages> for the raw JSON schema.
        # ...
      end
    else
-     response.data.try &.each do |message|
+     response.data.try do |message|
        puts message.container.try &.id
        puts message.id
 

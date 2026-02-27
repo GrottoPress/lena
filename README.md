@@ -25,7 +25,7 @@ client = Lena.new(api_key: "anthropic-api-key")
        # ...
      end
    else
-     response.data.try &.each do |message|
+     response.data.try do |message|
        puts message.container.try &.id
        puts message.id
 
