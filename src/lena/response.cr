@@ -11,9 +11,13 @@ module Lena::Response
     include Lena::Resource
 
     getter error : Lena::Error?
-    getter organization_id : String?
-    getter request_id : String?
     getter type : Lena::Response::Type?
+
+    @[JSON::Field(ignore: true)]
+    getter organization_id : String?
+
+    @[JSON::Field(ignore: true)]
+    getter request_id : String?
 
     def self.from_json(response : HTTP::Client::Response) : self
       from_json(response.body).set_additional_properties(response)
