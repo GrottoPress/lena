@@ -1,4 +1,9 @@
 struct Lena::Message
+  enum Role
+    User
+    Assistant
+  end
+
   enum StopReason
     EndTurn
     MaxTokens

@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Changed
 - Rename `Lena::ServiceTier` to `Lena::Usage::ServiceTier`
 - Rename `Lena::StopReason` to `Lena::Message::StopReason`
+- Rename `Lena::Role` to `Lena::Message::Role`
 
 ## [0.3.1] - 2026-02-26
 
