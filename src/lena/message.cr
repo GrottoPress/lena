@@ -1,4 +1,13 @@
 struct Lena::Message
+  enum StopReason
+    EndTurn
+    MaxTokens
+    StopSequence
+    ToolUse
+    PauseTurn
+    Refusal
+  end
+
   include Resource
 
   getter container : Container?
