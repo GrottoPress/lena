@@ -17,6 +17,7 @@ struct Lena::Message::Content
   include Resource
 
   getter caller : JSON::Any?
+  getter citations : Array(Citation)?
   getter content : JSON::Any?
   getter data : String?
   getter file_id : String?
