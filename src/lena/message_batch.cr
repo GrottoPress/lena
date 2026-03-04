@@ -1,4 +1,10 @@
 struct Lena::MessageBatch
+  enum ProcessingStatus
+    InProgress
+    Canceling
+    Ended
+  end
+
   include Resource
 
   getter archived_at : Time?

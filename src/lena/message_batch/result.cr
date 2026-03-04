@@ -1,4 +1,11 @@
 struct Lena::MessageBatch::Result
+  enum Type
+    Succeeded
+    Errored
+    Canceled
+    Expired
+  end
+
   include Resource
 
   @result : {error: Error?, message: Message?, type: Type}?
