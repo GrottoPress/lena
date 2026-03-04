@@ -1,4 +1,10 @@
 struct Lena::Usage
+  enum ServiceTier
+    Standard
+    Priority
+    Batch
+  end
+
   include Resource
 
   getter cache_creation : CacheCreation?
