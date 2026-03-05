@@ -36,6 +36,10 @@ struct Lena
     MessageBatch::Endpoint.new(self)
   end
 
+  def organizations : Organization::Endpoint
+    Organization::Endpoint.new(self)
+  end
+
   private def set_headers(api_key)
     @http_client.before_request do |request|
       set_content_type(request.headers)

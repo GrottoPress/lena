@@ -10,6 +10,6 @@ struct Lena::CurrentOrganization::Endpoint
   end
 
   getter uri : URI do
-    URI.parse(@client.uri.to_s).tap { |uri| uri.path += "/organizations/me" }
+    URI.parse(@client.organizations.uri.to_s).tap { |uri| uri.path += "/me" }
   end
 end
