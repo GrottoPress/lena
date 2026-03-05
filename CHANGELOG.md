@@ -9,6 +9,21 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 - Add `Lena::Message::Content#citations`
+- Add `Lena::Model::OPUS_4_6` constant
+- Add `Lena::Model::OPUS_4_5` constant
+- Add `Lena::Model::OPUS_4_5_20251101` constant
+- Add `Lena::Model::OPUS_4_1` constant
+- Add `Lena::Model::OPUS_4_1_20250805` constant
+- Add `Lena::Model::OPUS_4_0` constant
+- Add `Lena::Model::OPUS_4_0_20250514` constant
+- Add `Lena::Model::SONNET_4_6` constant
+- Add `Lena::Model::SONNET_4_5` constant
+- Add `Lena::Model::SONNET_4_5_20250929` constant
+- Add `Lena::Model::SONNET_4_0` constant
+- Add `Lena::Model::SONNET_4_0_20250514` constant
+- Add `Lena::Model::HAIKU_4_5` constant
+- Add `Lena::Model::HAIKU_4_5_20251001` constant
+- Add `Lena::Model::HAIKU_3_0_20240307` constant
 
 ### Fixed
 - Ignore response fields that are retrieved from headers when parsing JSON

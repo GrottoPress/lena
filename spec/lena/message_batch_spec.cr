@@ -44,7 +44,7 @@ describe Lena::MessageBatch::Endpoint do
           {
             custom_id: "request-1",
             params: {
-              model: "claude-3-haiku-20240307",
+              model: Lena::Model::OPUS_4_6,
               max_tokens: 1024,
               messages: [{role: "user", content: "Hello, world"}]
             }

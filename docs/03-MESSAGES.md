@@ -10,7 +10,7 @@ See <https://docs.anthropic.com/en/api/messages> for the raw JSON schema.
 
    ```crystal
    response = client.messages.create(
-     model: "claude-3-7-sonnet-20250219",
+     model: Lena::Model::OPUS_4_6,
      max_tokens: 1024,
      messages: [{role: "user", content: "Hello, world"}]
    )
@@ -42,7 +42,7 @@ See <https://docs.anthropic.com/en/api/messages> for the raw JSON schema.
 
    ```crystal
    response = client.messages.count_tokens(
-     model: "claude-3-7-sonnet-20250219",
+     model: Lena::Model::OPUS_4_5,
      messages: [{role: "user", content: "Hello, world"}]
    )
 

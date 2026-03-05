@@ -14,7 +14,7 @@ See <https://docs.anthropic.com/en/api/message-batches> for the raw JSON schema.
        {
          custom_id: "request-1",
          params: {
-           model: "claude-3-7-sonnet-20250219",
+           model: Lena::Model::OPUS_4_0,
            max_tokens: 1024,
            messages: [{role: "user", content: "Hello, world"}]
          }
@@ -22,7 +22,7 @@ See <https://docs.anthropic.com/en/api/message-batches> for the raw JSON schema.
        {
          custom_id: "request-2",
          params: {
-           model: "claude-3-7-sonnet-20250219",
+           model: Lena::Model::SONNET_4_6,
            max_tokens: 1024,
            messages: [{role: "user", content: "How are you?"}]
          }

@@ -13,7 +13,7 @@ client = Lena.new(api_key: "anthropic-api-key")
 
    ```crystal
    response = client.messages.create(
-     model: "claude-3-7-sonnet-20250219",
+     model: Lena::Model::OPUS_4_6,
      max_tokens: 1024,
      messages: [{role: "user", content: "Hello, world"}]
    )
