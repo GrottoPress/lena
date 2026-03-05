@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased] - 
 
 ### Added
+- Add `Lena::CurrentOrganization::Endpoint`
 - Add `Lena::Message::Content#citations`
 - Add `Lena::Model::OPUS_4_6` constant
 - Add `Lena::Model::OPUS_4_5` constant

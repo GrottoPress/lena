@@ -20,6 +20,10 @@ struct Lena
 
   forward_missing_to @http_client
 
+  def current_organization : CurrentOrganization::Endpoint
+    CurrentOrganization::Endpoint.new(self)
+  end
+
   def messages : Message::Endpoint
     Message::Endpoint.new(self)
   end

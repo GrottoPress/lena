@@ -5,6 +5,7 @@ module Lena::Response
     MessageBatch
     MessageBatchDeleted
     Model
+    Organization
   end
 
   macro included
