@@ -5,7 +5,9 @@ struct Lena::Message::Endpoint
   end
 
   def create(headers = nil, **params) : Item
+    params = params.merge(stream: false)
     response = @client.post(uri.path, headers, params.to_json)
+
     Item.from_json(response)
   end
 

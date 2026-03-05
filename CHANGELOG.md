@@ -28,6 +28,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Fixed
 - Ignore response fields that are retrieved from headers when parsing JSON
+- Turn off streaming in `Lena::Message::Endpoint#create`
 
 ### Changed
 - Rename `Lena::ServiceTier` to `Lena::Usage::ServiceTier`
