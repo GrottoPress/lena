@@ -2,7 +2,7 @@
 
 An organization is represented as `Lena::Organization`.
 
-See <https://docs.anthropic.com/en/api/admin-api/organization> for the raw JSON schema.
+See <https://platform.claude.com/docs/en/api/admin/organizations/me> for the raw JSON schema.
 
 ### Usage Examples
 
