@@ -8,6 +8,8 @@ module Lena::Response
     Organization
     User
     UserDeleted
+    Invite
+    InviteDeleted
   end
 
   macro included

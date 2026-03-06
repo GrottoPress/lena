@@ -24,6 +24,10 @@ struct Lena
     CurrentOrganization::Endpoint.new(self)
   end
 
+  def invites : Invite::Endpoint
+    Invite::Endpoint.new(self)
+  end
+
   def messages : Message::Endpoint
     Message::Endpoint.new(self)
   end
