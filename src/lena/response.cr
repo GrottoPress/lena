@@ -10,6 +10,7 @@ module Lena::Response
     UserDeleted
     Invite
     InviteDeleted
+    Workspace
   end
 
   macro included

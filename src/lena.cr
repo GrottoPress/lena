@@ -48,6 +48,10 @@ struct Lena
     User::Endpoint.new(self)
   end
 
+  def workspaces : Workspace::Endpoint
+    Workspace::Endpoint.new(self)
+  end
+
   private def set_headers(api_key)
     @http_client.before_request do |request|
       set_content_type(request.headers)
