@@ -11,6 +11,7 @@ module Lena::Response
     Invite
     InviteDeleted
     Workspace
+    ApiKey
   end
 
   macro included

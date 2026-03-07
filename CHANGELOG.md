@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Add `Lena::User::Endpoint`
 - Add `Lena::Invite::Endpoint`
 - Add `Lena::Workspace::Endpoint`
+- Add `Lena::ApiKey::Endpoint`
 - Add `Lena::Message::Content#citations`
 - Add `Lena::Model::OPUS_4_6` constant
 - Add `Lena::Model::OPUS_4_5` constant
