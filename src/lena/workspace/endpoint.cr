@@ -26,6 +26,7 @@ struct Lena::Workspace::Endpoint
   def update(id : String, headers = nil, **params) : Item
     path = "#{uri.path}/#{id}"
     response = @client.post(path, headers, params.to_json)
+
     Item.from_json(response)
   end
 
