@@ -26,8 +26,6 @@ struct Lena::ApiKey::Endpoint
   end
 
   getter uri : URI do
-    URI.parse(@client.organizations.uri.to_s).tap do |uri|
-      uri.path += "/api_keys"
-    end
+    clone_uri(@client.organizations.uri).tap { |uri| uri.path += "/api_keys" }
   end
 end

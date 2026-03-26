@@ -31,6 +31,6 @@ struct Lena::Invite::Endpoint
   end
 
   getter uri : URI do
-    URI.parse(@client.organizations.uri.to_s).tap { |uri| uri.path += "/invites" }
+    clone_uri(@client.organizations.uri).tap { |uri| uri.path += "/invites" }
   end
 end

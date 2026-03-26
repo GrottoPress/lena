@@ -45,6 +45,6 @@ struct Lena::MessageBatch::Endpoint
   end
 
   getter uri : URI do
-    URI.parse(@client.messages.uri.to_s).tap { |uri| uri.path += "/batches" }
+    clone_uri(@client.messages.uri).tap { |uri| uri.path += "/batches" }
   end
 end
